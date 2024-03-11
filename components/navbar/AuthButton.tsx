@@ -37,6 +37,7 @@ const AuthButton = async () => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="w-56">
+        <DropdownMenuSeparator />
         <DropdownMenuItem>
           <LogoutButton />
         </DropdownMenuItem>
