@@ -5,7 +5,7 @@ import AuthButton from "./AuthButton";
 
 const Navbar = () => {
   return (
-    <nav className="mb-5 shadow">
+    <nav className="mb-6 shadow">
       <div className="mx-auto max-w-screen-xl p-4">
         <div className="flex items-center justify-between">
           <Link

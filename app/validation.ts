@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+// SIGN UP
 export const SignupFormSchema = z
   .object({
     name: z
@@ -27,3 +28,18 @@ export const SignupFormSchema = z
   });
 
 export type SignupFormType = z.infer<typeof SignupFormSchema>;
+
+// SIGN IN
+export const SigninFormSchema = z.object({
+  email: z
+    .string({ required_error: "Email is required" })
+    .min(1, { message: "Email is required" })
+    .trim()
+    .email(),
+
+  password: z
+    .string({ required_error: "Password is required" })
+    .min(1, { message: "Pasword is required" }),
+});
+
+export type SigninFormType = z.infer<typeof SigninFormSchema>;
