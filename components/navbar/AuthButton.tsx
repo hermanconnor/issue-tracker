@@ -12,7 +12,7 @@ import {
 import LogoutButton from "./LogoutButton";
 
 const AuthButton = async () => {
-  const session = true;
+  const session = false;
 
   if (!session) {
     return (
