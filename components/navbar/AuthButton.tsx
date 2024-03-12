@@ -1,10 +1,12 @@
 import Link from "next/link";
+import { getServerSession } from "next-auth";
 import { Button } from "../ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
@@ -12,9 +14,9 @@ import {
 import LogoutButton from "./LogoutButton";
 
 const AuthButton = async () => {
-  const session = false;
+  const session = await getServerSession();
 
-  if (!session) {
+  if (!session || !session.user) {
     return (
       <div className="flex items-center gap-2">
         <Link href="/sign-in" className="">
@@ -37,6 +39,7 @@ const AuthButton = async () => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="w-56">
+        <DropdownMenuLabel>{session.user.email}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <LogoutButton />
