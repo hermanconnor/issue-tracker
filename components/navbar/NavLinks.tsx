@@ -19,8 +19,8 @@ const NavLinks = () => {
           <Link
             href={link.href}
             className={cn(
-              "font-medium text-sky-500 transition-colors hover:text-sky-600",
-              link.href === pathname && "text-sky-700",
+              "font-medium text-purple-500 transition-colors hover:text-purple-600",
+              link.href === pathname && "text-purple-800",
             )}
           >
             {link.label}
