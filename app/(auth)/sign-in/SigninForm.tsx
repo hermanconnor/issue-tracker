@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
-import axios, { AxiosError } from "axios";
 import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -29,6 +28,8 @@ import {
 import { SigninFormSchema, SigninFormType } from "@/app/validation";
 
 const SigninForm = () => {
+  const router = useRouter();
+
   const form = useForm<SigninFormType>({
     resolver: zodResolver(SigninFormSchema),
     defaultValues: {
@@ -38,7 +39,23 @@ const SigninForm = () => {
   });
 
   const onSubmit = async (values: SigninFormType) => {
-    console.log(values);
+    try {
+      const response = await signIn("credentials", {
+        ...values,
+        redirect: false,
+      });
+
+      if (response?.error) {
+        return toast.error(response.error);
+      }
+
+      if (response?.ok) {
+        router.push("/");
+        router.refresh();
+      }
+    } catch (error) {
+      toast.error("An unexpected error occurred");
+    }
   };
 
   return (
