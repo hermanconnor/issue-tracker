@@ -16,11 +16,24 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
 
 import { Issue, Status } from "@prisma/client";
 import { IssueSchema, IssueFormType } from "@/app/validation";
+
+const statusStrings = (Object.keys(Status) as (keyof typeof Status)[]).map(
+  (key) => {
+    return Status[key];
+  },
+);
 
 interface Props {
   issue?: Issue;
@@ -31,10 +44,6 @@ const IssueForm = ({ issue }: Props) => {
 
   const form = useForm<IssueFormType>({
     resolver: zodResolver(IssueSchema),
-    defaultValues: {
-      title: "",
-      description: "",
-    },
   });
 
   const onSubmit = async (values: IssueFormType) => {
@@ -59,41 +68,19 @@ const IssueForm = ({ issue }: Props) => {
           <FormField
             control={form.control}
             name="title"
+            defaultValue={issue?.title}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Title</FormLabel>
                 <FormControl>
-                  <Input
-                    type="text"
-                    placeholder="Title"
-                    defaultValue={issue?.title}
-                    {...field}
-                  />
+                  <Input type="text" placeholder="Title" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
 
-          <FormField
-            control={form.control}
-            name="description"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Description</FormLabel>
-                <FormControl>
-                  <SimpleMDE
-                    defaultValue={issue?.description}
-                    placeholder="Descrption"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          {/* <Controller
+          <Controller
             defaultValue={issue?.description}
             name="description"
             control={form.control}
@@ -103,7 +90,41 @@ const IssueForm = ({ issue }: Props) => {
           />
           <p className="text-[0.8rem] font-medium text-destructive">
             {form.formState.errors.description?.message}
-          </p> */}
+          </p>
+
+          {issue && (
+            <div className="flex w-full justify-end">
+              <FormField
+                control={form.control}
+                name="status"
+                defaultValue={issue.status}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Status</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={issue.status}
+                    >
+                      <FormControl>
+                        <SelectTrigger className="w-40">
+                          <SelectValue placeholder="Status" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {statusStrings.map((status) => (
+                          <SelectItem key={status} value={status}>
+                            {status}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+          )}
 
           <Button
             disabled={form.formState.isSubmitting}

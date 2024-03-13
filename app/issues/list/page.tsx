@@ -6,7 +6,9 @@ import prisma from "@/lib/db";
 import IssueTable from "./IssueTable";
 
 const IssuesListPage = async () => {
-  const issues = await prisma.issue.findMany({});
+  const issues = await prisma.issue.findMany({
+    orderBy: { createdAt: "asc" },
+  });
 
   return (
     <div className="space-y-6">

@@ -67,3 +67,27 @@ export const IssueSchema = z.object({
 });
 
 export type IssueFormType = z.infer<typeof IssueSchema>;
+
+// EDIT ISSUE FORM
+export const EditIssueSchema = z.object({
+  title: z
+    .string({ required_error: "Title is required" })
+    .min(1, { message: "Title is required" })
+    .max(255, { message: "Title must be less than 255 characters" })
+    .optional(),
+
+  description: z
+    .string({ required_error: "Description is required" })
+    .min(1, { message: "Description is required" })
+    .max(65535)
+    .optional(),
+
+  userId: z
+    .string()
+    .min(1, { message: "UserId is required" })
+    .max(255)
+    .optional()
+    .nullable(),
+
+  status: z.nativeEnum(Status).optional(),
+});
