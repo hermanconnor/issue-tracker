@@ -5,6 +5,8 @@ import axios from "axios";
 import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, Controller } from "react-hook-form";
+import SimpleMDE from "react-simplemde-editor";
+import "easymde/dist/easymde.min.css";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,8 +25,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import SimpleMDE from "react-simplemde-editor";
-import "easymde/dist/easymde.min.css";
 
 import { Issue, Status } from "@prisma/client";
 import { IssueSchema, IssueFormType } from "@/app/validation";

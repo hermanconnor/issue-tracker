@@ -73,15 +73,11 @@ export const EditIssueSchema = z.object({
   title: z
     .string({ required_error: "Title is required" })
     .min(1, { message: "Title is required" })
-    .max(255, { message: "Title must be less than 255 characters" })
-    .optional(),
-
+    .max(255, { message: "Title must be less than 255 characters" }),
   description: z
     .string({ required_error: "Description is required" })
     .min(1, { message: "Description is required" })
-    .max(65535)
-    .optional(),
-
+    .max(65535),
   userId: z
     .string()
     .min(1, { message: "UserId is required" })
@@ -89,5 +85,5 @@ export const EditIssueSchema = z.object({
     .optional()
     .nullable(),
 
-  status: z.nativeEnum(Status).optional(),
+  status: z.nativeEnum(Status),
 });
