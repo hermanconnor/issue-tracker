@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { Status } from "@prisma/client";
 
 // SIGN UP
 export const SignupFormSchema = z
@@ -43,3 +44,26 @@ export const SigninFormSchema = z.object({
 });
 
 export type SigninFormType = z.infer<typeof SigninFormSchema>;
+
+// ISSUE FORM
+export const IssueSchema = z.object({
+  title: z
+    .string({ required_error: "Title is required" })
+    .trim()
+    .min(1, { message: "Title is required" })
+    .max(255, { message: "Title must be less than 255 characters" }),
+  description: z
+    .string({ required_error: "Description is required" })
+    .trim()
+    .min(1, { message: "Description is required" })
+    .max(65535),
+  status: z
+    .nativeEnum(Status, {
+      errorMap: (issue, ctx) => {
+        return { message: "Status is required" };
+      },
+    })
+    .default(Status.OPEN),
+});
+
+export type IssueFormType = z.infer<typeof IssueSchema>;

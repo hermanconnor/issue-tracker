@@ -108,14 +108,10 @@ const SigninForm = () => {
               type="submit"
               className="w-full"
             >
-              {form.formState.isSubmitting ? (
-                <>
-                  <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-                  Sign In
-                </>
-              ) : (
-                "Sign In"
+              {form.formState.isSubmitting && (
+                <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
               )}
+              Sign In
             </Button>
           </form>
         </Form>
