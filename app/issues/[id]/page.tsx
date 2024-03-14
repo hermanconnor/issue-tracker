@@ -2,6 +2,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import IssueDetailsCard from "./IssueDetailsCard";
+import EditIssueButton from "./EditIssueButton";
+import DeleteIssueButton from "./DeleteIssueButton";
+import AssigneeSelect from "./AssigneeSelect";
 import prisma from "@/lib/db";
 import { getUsers } from "@/lib/getUsers";
 
@@ -27,9 +30,9 @@ const IssueDetailPage = async ({ params: { id } }: Props) => {
       </div>
 
       <div className="mt-5 flex flex-col gap-4">
-        <div>assignee select</div>
-        <button>edit button</button>
-        <button>delete button</button>
+        <AssigneeSelect users={users} issue={issue} />
+        <EditIssueButton issueId={issue.id} />
+        <DeleteIssueButton issueId={issue.id} />
       </div>
     </div>
   );

@@ -16,7 +16,9 @@ const IssuesListPage = async () => {
         <div>Select goes here</div>
 
         <Button asChild variant="primary">
-          <Link href="/issues/new">New Issue</Link>
+          <Link href="/issues/new">
+            <PlusIcon className="mr-2 h-4 w-4" /> New Issue
+          </Link>
         </Button>
       </div>
 

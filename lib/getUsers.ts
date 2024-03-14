@@ -1,6 +1,8 @@
 import prisma from "./db";
 import { User } from "@prisma/client";
 
+export type UserWithoutPassword = Omit<User, "password">;
+
 export const getUsers = async () => {
   const users = await prisma.user.findMany({
     orderBy: { name: "asc" },
