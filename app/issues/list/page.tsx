@@ -7,6 +7,7 @@ import { Status } from "@prisma/client";
 import IssueTable, { columnNames } from "./IssueTable";
 import IssueStatusFilter from "./IssueStatusFilter";
 import { IssueQuery } from "@/lib/definitions";
+import Pagination from "@/components/Pagination";
 
 interface Props {
   searchParams: IssueQuery;
@@ -28,9 +29,19 @@ const IssuesListPage = async ({ searchParams }: Props) => {
     ? { [searchParams.orderBy]: "asc" }
     : undefined;
 
+  const page = parseInt(searchParams.page) || 1;
+  const pageSize = 10;
+
+  // take - is the number of records we want to fetch
   const issues = await prisma.issue.findMany({
     where: { status },
     orderBy,
+    skip: (page - 1) * pageSize,
+    take: pageSize,
+  });
+
+  const issueCount = await prisma.issue.count({
+    where: { status },
   });
 
   return (
@@ -46,6 +57,12 @@ const IssuesListPage = async ({ searchParams }: Props) => {
       </div>
 
       <IssueTable searchParams={searchParams} issues={issues} />
+
+      <Pagination
+        itemCount={issueCount}
+        pageSize={pageSize}
+        currentPage={page}
+      />
     </div>
   );
 };

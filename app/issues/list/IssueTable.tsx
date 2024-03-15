@@ -38,7 +38,7 @@ const IssueTable = ({ searchParams, issues }: Props) => {
               >
                 {column.label}
                 {column.value === searchParams.orderBy && (
-                  <ArrowUpIcon className="h-4 w-4" />
+                  <ArrowUpIcon className="inline h-4 w-4" />
                 )}
               </Link>
             </TableHead>
@@ -50,10 +50,7 @@ const IssueTable = ({ searchParams, issues }: Props) => {
         {issues.map((issue) => (
           <TableRow key={issue.id}>
             <TableCell className="space-y-3 md:space-y-0">
-              <Link
-                href={`/issues/${issue.id}`}
-                className="font-medium text-purple-500"
-              >
+              <Link href={`/issues/${issue.id}`} className="text-purple-500">
                 {issue.title}
               </Link>
               <div className="block md:hidden">

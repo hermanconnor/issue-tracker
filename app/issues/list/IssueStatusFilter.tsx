@@ -33,7 +33,7 @@ const IssueStatusFilter = () => {
       params.append("orderBy", searchParams.get("orderBy")!);
     }
 
-    const query = params.size ? "?" + params.toString() : "";
+    const query = params.size ? `?${params.toString()}` : "";
 
     router.push(`/issues/list${query}`);
   };

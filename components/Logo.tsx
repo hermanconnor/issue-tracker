@@ -6,7 +6,7 @@ const Logo = () => {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className="h-8 w-8 md:h-7 md:w-7"
+      className="h-8 w-8 text-purple-500 hover:text-purple-600 md:h-7 md:w-7"
     >
       <path
         strokeLinecap="round"

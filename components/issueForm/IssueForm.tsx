@@ -68,7 +68,7 @@ const IssueForm = ({ issue }: Props) => {
           <FormField
             control={form.control}
             name="title"
-            defaultValue={issue?.title}
+            defaultValue={issue?.title || ""}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Title</FormLabel>
@@ -81,7 +81,7 @@ const IssueForm = ({ issue }: Props) => {
           />
 
           <Controller
-            defaultValue={issue?.description}
+            defaultValue={issue?.description || ""}
             name="description"
             control={form.control}
             render={({ field }) => (
