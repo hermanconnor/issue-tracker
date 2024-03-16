@@ -64,7 +64,7 @@ const IssueForm = ({ issue }: Props) => {
   return (
     <div className="mx-auto max-w-xl py-4">
       <Form {...form}>
-        <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
+        <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
             control={form.control}
             name="title"

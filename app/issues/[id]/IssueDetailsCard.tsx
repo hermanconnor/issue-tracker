@@ -1,13 +1,6 @@
 import Markdown from "react-markdown";
 import { Separator } from "@/components/ui/separator";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { Issue } from "@prisma/client";
 import IssueStatusBadge from "@/components/IssueStatusBadge";

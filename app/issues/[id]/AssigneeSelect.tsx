@@ -34,7 +34,7 @@ const AssigneeSelect = ({ users, issue }: Props) => {
       defaultValue={issue.userId || "unassigned"}
       onValueChange={handleChange}
     >
-      <SelectTrigger className="">
+      <SelectTrigger>
         <SelectValue placeholder="Assign" />
       </SelectTrigger>
       <SelectContent>
