@@ -46,7 +46,7 @@ const SignupForm = () => {
         await signIn("credentials", {
           ...values,
           redirect: true,
-          callbackUrl: "/",
+          callbackUrl: "/dashboard",
         });
       }
     } catch (error) {
