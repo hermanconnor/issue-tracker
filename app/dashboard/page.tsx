@@ -1,3 +1,4 @@
+import IssuesSummary from "./IssuesSummary";
 import IssuesChart from "./IssuesChart";
 import prisma from "@/lib/db";
 
@@ -9,13 +10,12 @@ const DashboardPage = async () => {
   });
 
   return (
-    <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-      <div className="flex flex-col gap-5">
-        <div>Issue Summary</div>
+    <div className="space-y-6">
+      <IssuesSummary open={open} inProgress={inProgress} closed={closed} />
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <IssuesChart open={open} inProgress={inProgress} closed={closed} />
+        <div>Latest Issues</div>
       </div>
-
-      <div>Latest Issues</div>
     </div>
   );
 };
