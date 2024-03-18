@@ -33,8 +33,13 @@ const AuthButton = async () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Avatar className="cursor-pointer">
-          <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-          <AvatarFallback>CN</AvatarFallback>
+          <AvatarImage
+            src={session?.user?.image || "/images/profile-pic-placeholder.png"}
+            alt={session?.user?.name || "Assigned user"}
+          />
+          <AvatarFallback>
+            {session.user.name?.charAt(0).toUpperCase()}
+          </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
 

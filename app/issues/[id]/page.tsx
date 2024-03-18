@@ -1,9 +1,11 @@
 import { notFound } from "next/navigation";
+import { getServerSession } from "next-auth";
 
 import IssueDetailsCard from "./IssueDetailsCard";
 import EditIssueButton from "./EditIssueButton";
 import DeleteIssueButton from "./DeleteIssueButton";
 import AssigneeSelect from "./AssigneeSelect";
+import authOptions from "@/app/api/auth/authOptions";
 import prisma from "@/lib/db";
 import { getUsers } from "@/lib/getUsers";
 
@@ -13,6 +15,8 @@ interface Props {
 
 const IssueDetailPage = async ({ params: { id } }: Props) => {
   if (isNaN(Number(id))) notFound();
+
+  const session = await getServerSession(authOptions);
 
   const issue = await prisma.issue.findUnique({
     where: { id: parseInt(id) },
@@ -28,11 +32,13 @@ const IssueDetailPage = async ({ params: { id } }: Props) => {
         <IssueDetailsCard issue={issue} />
       </div>
 
-      <div className="mt-5 flex flex-col gap-4">
-        <AssigneeSelect users={users} issue={issue} />
-        <EditIssueButton issueId={issue.id} />
-        <DeleteIssueButton issueId={issue.id} />
-      </div>
+      {session && (
+        <div className="mt-5 flex flex-col gap-4">
+          <AssigneeSelect users={users} issue={issue} />
+          <EditIssueButton issueId={issue.id} />
+          <DeleteIssueButton issueId={issue.id} />
+        </div>
+      )}
     </div>
   );
 };
