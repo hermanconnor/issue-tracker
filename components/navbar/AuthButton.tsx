@@ -1,7 +1,5 @@
-import Link from "next/link";
 import { getServerSession } from "next-auth";
-import { Button } from "../ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,25 +7,13 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 
 import LogoutButton from "./LogoutButton";
+import authOptions from "@/app/api/auth/authOptions";
 
 const AuthButton = async () => {
-  const session = await getServerSession();
-
-  if (!session || !session.user) {
-    return (
-      <div className="flex items-center gap-2">
-        <Link href="/sign-in" className="">
-          Sign In
-        </Link>
-        <Button asChild variant="ghost">
-          <Link href="/sign-up">Sign Up</Link>
-        </Button>
-      </div>
-    );
-  }
+  const session = await getServerSession(authOptions);
 
   return (
     <DropdownMenu>
@@ -38,13 +24,13 @@ const AuthButton = async () => {
             alt={session?.user?.name || "Assigned user"}
           />
           <AvatarFallback>
-            {session.user.name?.charAt(0).toUpperCase()}
+            {session?.user?.name?.charAt(0).toUpperCase()}
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>{session.user.email}</DropdownMenuLabel>
+        <DropdownMenuLabel>{session?.user?.email}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <LogoutButton />
