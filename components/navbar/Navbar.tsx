@@ -7,9 +7,10 @@ import NavLinks from "./NavLinks";
 import AuthButton from "./AuthButton";
 import MobileNav from "./MobileNav";
 import authOptions from "@/app/api/auth/authOptions";
+import AuthLinks from "./AuthLinks";
 
-const Navbar = async () => {
-  const session = await getServerSession(authOptions);
+const Navbar = () => {
+  // const session = await getServerSession(authOptions);
 
   return (
     <nav className="mb-6 shadow">
@@ -27,8 +28,8 @@ const Navbar = async () => {
             <NavLinks />
           </div>
 
-          <div className="flex items-center space-x-4">
-            {session && session.user ? (
+          <div className="flex items-center space-x-5">
+            {/* {session && session.user ? (
               <AuthButton />
             ) : (
               <div className="flex items-center gap-2">
@@ -43,7 +44,8 @@ const Navbar = async () => {
                   <Link href="/sign-up">Sign Up</Link>
                 </Button>
               </div>
-            )}
+            )} */}
+            <AuthLinks />
 
             <MobileNav />
           </div>
