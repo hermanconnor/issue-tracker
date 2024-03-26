@@ -7,10 +7,9 @@ import NavLinks from "./NavLinks";
 import AuthButton from "./AuthButton";
 import MobileNav from "./MobileNav";
 import authOptions from "@/app/api/auth/authOptions";
-import AuthLinks from "./AuthLinks";
 
-const Navbar = () => {
-  // const session = await getServerSession(authOptions);
+const Navbar = async () => {
+  const session = await getServerSession(authOptions);
 
   return (
     <nav className="mb-6 shadow">
@@ -22,14 +21,14 @@ const Navbar = () => {
               className="flex items-center gap-1 font-bold text-inherit"
             >
               <Logo />
-              <span className="text-lg">Issue Tracker</span>
+              <span className="font-black">Issue Tracker</span>
             </Link>
 
             <NavLinks />
           </div>
 
           <div className="flex items-center space-x-5">
-            {/* {session && session.user ? (
+            {session && session.user ? (
               <AuthButton />
             ) : (
               <div className="flex items-center gap-2">
@@ -44,8 +43,7 @@ const Navbar = () => {
                   <Link href="/sign-up">Sign Up</Link>
                 </Button>
               </div>
-            )} */}
-            <AuthLinks />
+            )}
 
             <MobileNav />
           </div>
