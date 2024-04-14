@@ -39,11 +39,14 @@ export async function POST(request: NextRequest) {
     },
   });
 
-  return NextResponse.json({
-    id: user.id,
-    name: user.name,
-    email: user.email,
-    emailVerified: user.emailVerified,
-    image: user.image,
-  });
+  return NextResponse.json(
+    {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      emailVerified: user.emailVerified,
+      image: user.image,
+    },
+    { status: 201 },
+  );
 }

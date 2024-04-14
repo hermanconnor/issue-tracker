@@ -11,7 +11,7 @@ const DashboardPage = async () => {
   });
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 py-4">
       <IssuesSummary open={open} inProgress={inProgress} closed={closed} />
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <IssuesChart open={open} inProgress={inProgress} closed={closed} />
