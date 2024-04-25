@@ -1,9 +1,18 @@
+import { redirect } from "next/navigation";
+import { getServerSession } from "next-auth";
 import IssuesSummary from "./IssuesSummary";
 import IssuesChart from "./IssuesChart";
 import LatestIssues from "./LatestIssues";
 import prisma from "@/lib/db";
+import authOptions from "../api/auth/authOptions";
 
 const DashboardPage = async () => {
+  const session = await getServerSession(authOptions);
+
+  if (!session?.user) {
+    redirect("/sign-in?callbackUrl=/dashboard");
+  }
+
   const open = await prisma.issue.count({ where: { status: "OPEN" } });
   const closed = await prisma.issue.count({ where: { status: "CLOSED" } });
   const inProgress = await prisma.issue.count({

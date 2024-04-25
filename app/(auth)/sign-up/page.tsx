@@ -7,7 +7,7 @@ import authOptions from "@/app/api/auth/authOptions";
 const SignupPage = async () => {
   const session = await getServerSession(authOptions);
 
-  if (session) {
+  if (session?.user) {
     redirect("/dashboard");
   }
   return <SignupForm />;
