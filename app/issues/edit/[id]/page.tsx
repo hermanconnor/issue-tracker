@@ -21,7 +21,7 @@ const EditIssuePage = async ({ params: { id } }: Props) => {
   const session = await getServerSession(authOptions);
 
   if (!session?.user) {
-    redirect(`/sign-in?callbackUrl=/issues/edit/${id}`);
+    redirect(`/sign-in`);
   }
 
   const issue = await prisma.issue.findUnique({

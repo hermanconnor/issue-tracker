@@ -13,7 +13,7 @@ const NewIssuePage = async () => {
   const session = await getServerSession(authOptions);
 
   if (!session?.user) {
-    redirect("/sign-in?callbackUrl=/issues/new");
+    redirect("/sign-in");
   }
 
   return <IssueForm />;

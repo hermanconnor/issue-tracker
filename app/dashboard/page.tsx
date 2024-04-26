@@ -10,7 +10,7 @@ const DashboardPage = async () => {
   const session = await getServerSession(authOptions);
 
   if (!session?.user) {
-    redirect("/sign-in?callbackUrl=/dashboard");
+    redirect("/sign-in");
   }
 
   const open = await prisma.issue.count({ where: { status: "OPEN" } });
