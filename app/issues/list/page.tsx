@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { PlusIcon } from "@radix-ui/react-icons";
@@ -12,6 +13,13 @@ import Pagination from "@/components/Pagination";
 interface Props {
   searchParams: IssueQuery;
 }
+
+export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Issues List",
+  description: "View all project issues",
+};
 
 const IssuesListPage = async ({ searchParams }: Props) => {
   const statuses = Object.values(Status);

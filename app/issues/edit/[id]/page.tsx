@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import dynamic from "next/dynamic";
 import { getServerSession } from "next-auth";
@@ -5,6 +6,11 @@ import { getServerSession } from "next-auth";
 import prisma from "@/lib/db";
 import EditFormSkeleton from "./EditFormSkeleton";
 import authOptions from "@/app/api/auth/authOptions";
+
+export const metadata: Metadata = {
+  title: "Edit Issue",
+  description: "Edit Issue",
+};
 
 const IssueForm = dynamic(() => import("@/components/issueForm/IssueForm"), {
   ssr: false,
